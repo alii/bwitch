@@ -2,6 +2,12 @@
 
 A tiny weeny pattern matcher with zero dependencies. Requires TypeScript 5.0+
 
+## Install
+
+```bash
+yarn add bwitch
+```
+
 ## Usage
 
 ```typescript
