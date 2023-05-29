@@ -1,0 +1,39 @@
+{
+	"name": "bwitch",
+	"packageManager": "yarn@3.5.1",
+	"description": "A tiny weeny pattern matcher",
+	"version": "0.1.0",
+	"type": "module",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.cts",
+	"exports": {
+		".": {
+			"import": {
+				"default": "./dist/index.js",
+				"types": "./dist/index.d.ts"
+			},
+			"require": {
+				"default": "./dist/index.cjs",
+				"types": "./dist/index.d.cts"
+			}
+		},
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"dist",
+		"package.json",
+		"README.md",
+		"LICENSE"
+	],
+	"scripts": {
+		"bundle": "tsup src/index.ts --dts --format=esm,cjs",
+		"copy-types": "cp ./dist/index.d.ts ./dist/index.d.cts",
+		"build": "yarn bundle && yarn copy-types"
+	},
+	"devDependencies": {
+		"prettier": "^2.8.8",
+		"tsup": "^6.7.0",
+		"typescript": "^5.0.4"
+	}
+}
