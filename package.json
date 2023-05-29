@@ -7,6 +7,20 @@
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.cts",
+	"license": "MIT",
+	"homepage": "https://github.com/alii/bwitch",
+	"bugs": {
+		"url": "https://github.com/alii/bwitch/issues"
+	},
+	"funding": {
+		"type": "github",
+		"url": "https://github.com/sponsors/alii"
+	},
+	"author": {
+		"name": "Alistair Smith",
+		"url": "https://alistair.sh",
+		"email": "hi@alistair.sh"
+	},
 	"exports": {
 		".": {
 			"import": {
@@ -29,7 +43,8 @@
 	"scripts": {
 		"bundle": "tsup src/index.ts --dts --format=esm,cjs",
 		"copy-types": "cp ./dist/index.d.ts ./dist/index.d.cts",
-		"build": "yarn bundle && yarn copy-types"
+		"build": "yarn bundle && yarn copy-types",
+		"release": "yarn build && yarn npm publish"
 	},
 	"devDependencies": {
 		"prettier": "^2.8.8",
