@@ -2,7 +2,7 @@
 	"name": "bwitch",
 	"packageManager": "yarn@3.5.1",
 	"description": "A tiny weeny pattern matcher",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
