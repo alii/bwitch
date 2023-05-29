@@ -11,6 +11,8 @@ yarn add bwitch
 ## Usage
 
 ```typescript
+import {bwitch} from 'bwitch';
+
 const page = 'home';
 
 const route = bwitch(page)
@@ -24,6 +26,8 @@ route; // => `"/api/home/timeline" | "/api/v1/weather/forecast"`
 Alternatively, you can finish a bwitch with a default case, or a helper to default to null
 
 ```typescript
+import {bwitch} from 'bwitch';
+
 const page = 'home';
 
 // Specify default
