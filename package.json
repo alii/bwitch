@@ -2,7 +2,7 @@
 	"name": "bwitch",
 	"packageManager": "yarn@3.5.1",
 	"description": "A tiny weeny pattern matcher",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"type": "module",
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
@@ -24,12 +24,12 @@
 	"exports": {
 		".": {
 			"import": {
-				"default": "./dist/index.js",
-				"types": "./dist/index.d.ts"
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
 			},
 			"require": {
-				"default": "./dist/index.cjs",
-				"types": "./dist/index.d.cts"
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
 			}
 		},
 		"./package.json": "./package.json"
