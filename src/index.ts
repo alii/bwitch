@@ -2,13 +2,20 @@ export type CaseExecutor<In, R> = (value: In) => R;
 export type Case<T, R> = {value: T; execute: CaseExecutor<T, R>};
 
 export interface Expression<T, R> {
-	case: <const In extends T, const Next>(value: In, execute: CaseExecutor<In, Next>) => Expression<T, R | Next>;
+	case: <const In extends T, const Next>(
+		value: In,
+		execute: CaseExecutor<In, Next>,
+	) => Expression<T, R | Next>;
 	or: <const Next>(execute: CaseExecutor<T, Next>) => R | Next;
 	orThrow: () => R;
 	orNull: () => R | null;
 }
 
-export function run<T, R>(rootValue: T, cases: Case<T, R>[], or: (value: T) => R): R {
+export function run<T, R>(
+	rootValue: T,
+	cases: Case<T, R>[],
+	or: (value: T) => R,
+): R {
 	for (const c of cases) {
 		if (rootValue === c.value) {
 			return c.execute(rootValue);
@@ -18,9 +25,15 @@ export function run<T, R>(rootValue: T, cases: Case<T, R>[], or: (value: T) => R
 	return or(rootValue);
 }
 
-export function expression<T, R>(rootValue: T, cases: Case<T, R>[]): Expression<T, R> {
+export function expression<T, R>(
+	rootValue: T,
+	cases: Case<T, R>[],
+): Expression<T, R> {
 	return {
-		case: <const In extends T, const Next>(value: In, execute: CaseExecutor<In, Next>) => {
+		case: <const In extends T, const Next>(
+			value: In,
+			execute: CaseExecutor<In, Next>,
+		) => {
 			const nextCases = [
 				...cases,
 				{
@@ -36,9 +49,14 @@ export function expression<T, R>(rootValue: T, cases: Case<T, R>[]): Expression<
 			return run<T, R | Next>(rootValue, cases, value => execute(value));
 		},
 
-		orThrow: () => {
+		orThrow: (getMessage?: string | ((value: T) => string)) => {
 			return run(rootValue, cases, () => {
-				throw new Error('Unhandled value passed to bwitch');
+				const message =
+					getMessage instanceof Function
+						? getMessage(rootValue)
+						: getMessage ?? 'Unhandled value passed to bwitch';
+
+				throw new Error(message);
 			});
 		},
 
